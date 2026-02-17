@@ -25,7 +25,7 @@
        7. Computing loss
 
 
-## Architecture to Output
+## Architecture to train
 
     Input Tokens
         ↓
@@ -66,6 +66,53 @@
         ↓
     Save Model
 
-## After training the model you have to run the create_tokenizer.py [ python create_tokenizer.py ] to create the tokenizer.pkl . Without tokenizer.pkl the token cannot decode text.
-  
+## Important Process
+
+    1. Clone the Project
+    2. Download train.csv, test.csv and validation.csv
+    3. Train the model
+    4. Create tokenizer.pkl
+    5. Generate Script, test the model
+
+## Improvements may done
+
+    1. **Add Top-K Sampling** 
+        Example : 
+            Replace ->
+                probs = torch.softmax(logits, dim=-1)
+                next_token = torch.multinomial(probs, num_samples=1)
+
+            With ->
+                top_k = 20
+                values, indices = torch.topk(logits, top_k)
+                probs = torch.softmax(values, dim=-1)
+                next_token = indices.gather(-1, torch.multinomial(probs, 1))
+
+        This prevents weird low-probability tokens.
+
+    2. **The more steps, the more the model give better result**
+
+        Example: 10k, 50k will give better result
+
+    3. **Increase Model Size**
+
+        Try:
+
+        n_embd = 256
+        n_head = 8
+        n_layer = 6
+
+
+        Bigger model = better memory = more precise output.
+
+## Commands to Run
+
+    **To train the model**  - Python train.py
+
+    **To create the tokenizer.pkl** - Python create_tokenizer.py
+
+    **To test or generate output** - Python generate.py
+        
+
+
 
