@@ -25,7 +25,7 @@
        7. Computing loss
 
 
-## Architecture to train
+## Architecture to Output
 
     Input Tokens
         ↓
@@ -68,3 +68,4 @@
 
 ## After training the model you have to run the create_tokenizer.py [ python create_tokenizer.py ] to create the tokenizer.pkl . Without tokenizer.pkl the token cannot decode text.
   
+
